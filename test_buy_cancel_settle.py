@@ -47,18 +47,31 @@ public_key_sol = extract_keys(fich_input('info_market_wallet'),'public_key_sol')
 token_mint_wallet_bas = extract_keys(fich_input('info_market_wallet'),'token_mint_wallet_bas')    #wallet mint BTC
 token_mint_wallet_quo = extract_keys(fich_input('info_market_wallet'),'token_mint_wallet_quo')    #wallet mint USDT
 
-cfApisol = cfApi_sol.SolSerumClient(cret_b58=cret_b58,market_address=market_serum, owner_wallet=public_key_sol,\
+cfApisol = cfApi_sol.SolSerumClient(secret_b58=secret_b58,market_address=market_serum, owner_wallet=public_key_sol,\
                                 token_mint_wallet_bas=token_mint_wallet_bas, token_mint_wallet_quo=token_mint_wallet_quo)
 
 
 print(cfApisol.check_pub_key())
 
-cfApisol.ex_ordre_serum('buy',0.0005,18100)
+
+#try to send an order (place on purpose an order couldn't be fill)
+
+cfApisol.ex_ordre_serum('buy',0.0005,5000)
 input('order sent')
 sleep(20)
+
+#after waiting a little to be sure the order is in the orderbook,
+#try to cancel it
+
 cfApisol.cancel_serum()
 input('order cancelled')
 sleep(20)
+
+#after the cancelling, it waits a little to be sure it was cancelled
+#then it try to settle the wallet (enter here the approximate amount
+#and the limite price of the precedent order), it'll check that was 
+#realised after multiple try, since the amount appear in the wallet.
+
 cfApisol.settl_withCheck_done(0.0005,19000)
 print('wallet settled')
 
