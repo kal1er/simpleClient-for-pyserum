@@ -34,4 +34,4 @@ Then it try to settle the wallet
 "cfApisol.settl_withCheck_done(amount,price)"
 
 (enter the approximate amount and the limite price of the precedent order), it'll check 
-that was released after multiple tries, since the amount appear in the wallet.
+that was released after multiple tries, since the amount appears in the wallet.
