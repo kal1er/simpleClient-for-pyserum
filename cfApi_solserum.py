@@ -19,11 +19,11 @@ import sys
 
 class SolSerumClient:
     
-    def __init__(self,cret_b58=None, market_address=None, owner_wallet=None, token_mint_wallet_bas=None, token_mint_wallet_quo=None) -> None:
+    def __init__(self,secret_b58=None, market_address=None, owner_wallet=None, token_mint_wallet_bas=None, token_mint_wallet_quo=None) -> None:
         base_url = 'https://api.mainnet-beta.solana.com/'
         self._cc = conn(base_url)
         self._market = Market.load(conn(base_url), PublicKey(market_address))
-        self._payer = Account(base58.b58decode(cret_b58)[:32])
+        self._payer = Account(base58.b58decode(secret_b58)[:32])
         self._owner_wallet = owner_wallet
         self._token_mint_wallet_bas = token_mint_wallet_bas
         self._token_mint_wallet_quo = token_mint_wallet_quo
@@ -57,14 +57,14 @@ class SolSerumClient:
                                         owner = self._payer,
                                         side = sens,
                                         order_type = OrderType.Limit,
-                                        limit_price = pri,# prix diviser par 10 pour BTC ex 193750 pour 19375,0
-                                        max_quantity = qte,# qte 1er et diviser par 10000 pour BTC ex 1 pour 0.0001
+                                        limit_price = pri,              # price divided per 10 for BTC ex 193750 pour 19375,0
+                                        max_quantity = qte,             # quantity divided per 10000 for BTC ex 1 pour 0.0001 (mini 1)
                                         opts = TxOpts()
                                         )
             print(tx_sig)
             return tx_sig['result']
         except:
-            print('erreur de transaction (qte peut-etre non-conforme)')
+            print('transaction argument error (probably amount non-conforme)')
     
     def cancel_serum(self):
         try:
@@ -74,7 +74,7 @@ class SolSerumClient:
             print(canc)
             return canc['result']
         except:
-            print('pas d_ordre à annulé')
+            print('no order to cancel')
     
     def settl_wal_serum(self):
         settl = None
@@ -88,7 +88,7 @@ class SolSerumClient:
             print(settl)
             return 0, settl
         except:
-            print('pas de somme en attente à récuperer')
+            print('no amount to settle')
             return 1, settl
     
     def settl_withCheck_done(self,qte_ord,pri):
@@ -121,11 +121,4 @@ class SolSerumClient:
             else:
                 tok = self._token_mint_wallet_quo
         return self._cc.get_token_account_balance(tok)['result']['value']['uiAmount']
-    
-    def last_fills(self):
-        bids = self._market.load_event_queue()[0]
-        #fret = self._market.load_orders_for_owner(self._owner_wallet)[0]
-        print(list(bids))
-        #for bid in bids:
-        #    print("Order id: %d, price: %f, size: %f." % (\
-        #          bid.order_id, bid.info.price, bid.info.size))
+
