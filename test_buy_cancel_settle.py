@@ -56,7 +56,7 @@ print(cfApisol.check_pub_key())
 
 #try to send an order (place on purpose an order couldn't be fill)
 
-cfApisol.ex_ordre_serum('buy',0.0005,5000)
+cfApisol.ex_ordre_serum('buy',0.0005,12000)
 input('order sent')
 sleep(20)
 
@@ -72,6 +72,6 @@ sleep(20)
 #and the limite price of the precedent order), it'll check that was 
 #realised after multiple try, since the amount appear in the wallet.
 
-cfApisol.settl_withCheck_done(0.0005,19000)
+cfApisol.settl_withCheck_done(0.0005,12000)
 print('wallet settled')
 
