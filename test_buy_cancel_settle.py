@@ -42,7 +42,7 @@ def extract_keys(fil_in_put,info):
 
 
 market_serum = extract_keys(fich_input('info_market_wallet'),'market_serum')                      #address of market BTC-USDT
-secret_b58 = extract_keys(fich_input('info_market_wallet'),'market_serum')                        #secret key from sollet.io
+secret_b58 = extract_keys(fich_input('info_market_wallet'),'secret_b58')                        #secret key from sollet.io
 public_key_sol = extract_keys(fich_input('info_market_wallet'),'public_key_sol')                  #wallet SOL
 token_mint_wallet_bas = extract_keys(fich_input('info_market_wallet'),'token_mint_wallet_bas')    #wallet mint BTC
 token_mint_wallet_quo = extract_keys(fich_input('info_market_wallet'),'token_mint_wallet_quo')    #wallet mint USDT
