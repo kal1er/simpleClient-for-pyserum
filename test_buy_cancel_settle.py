@@ -42,7 +42,7 @@ def extract_keys(fil_in_put,info):
 
 
 market_serum = extract_keys(fich_input('info_market_wallet'),'market_serum')                      #address of market BTC-USDT
-secret_b58 = extract_keys(fich_input('info_market_wallet'),'secret_b58')                        #secret key from sollet.io
+secret_b58 = extract_keys(fich_input('info_market_wallet'),'secret_b58')                          #secret key from sollet.io
 public_key_sol = extract_keys(fich_input('info_market_wallet'),'public_key_sol')                  #wallet SOL
 token_mint_wallet_bas = extract_keys(fich_input('info_market_wallet'),'token_mint_wallet_bas')    #wallet mint BTC
 token_mint_wallet_quo = extract_keys(fich_input('info_market_wallet'),'token_mint_wallet_quo')    #wallet mint USDT
@@ -70,7 +70,7 @@ sleep(20)
 #after the cancelling, it waits a little to be sure it was cancelled
 #then it try to settle the wallet (enter here the approximate amount
 #and the limite price of the precedent order), it'll check that was 
-#realised after multiple try, since the amount appear in the wallet.
+#released after multiple try, since the amount appears in the wallet.
 
 cfApisol.settl_withCheck_done(0.0005,12000)
 print('wallet settled')
