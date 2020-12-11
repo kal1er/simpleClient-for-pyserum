@@ -18,7 +18,7 @@ def extract_keys(fil_in_put,info):
     if info == 'market_serum':
         li = 0
     if info == 'secret_b58':
-        li = 0
+        li = 1
     if info == 'public_key_sol':
         li = 2
     if info == 'token_mint_wallet_bas':
