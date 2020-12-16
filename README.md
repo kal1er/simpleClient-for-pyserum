@@ -24,10 +24,10 @@ token_mint_wallet_quo =  ''      between the quote insert the quote token recipi
 
 
 
-And the test file is an example how to use it,
+And the test file is an example how to use the client,
 
-in the examples we try to send an order (place on purpose an order couldn't be fill)
-after waiting a little to be sure the order is in the orderbook. We try to cancel it
+in the example we make an order to send it (place on purpose an order couldn't be filled).
+After waiting a little to be sure the order is in the orderbook, we try to cancel it
 and after the cancelling, it waits a little to be sure it was cancelled.
 Then it try to settle the wallet
 
