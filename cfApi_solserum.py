@@ -98,6 +98,7 @@ class SolSerumClient:
         print(val_av,val_ap,val_ord,sett_noNeed)
         nb_set = 0
         
+        settl = None
         while val_ap - val_av < (val_ord/2) and int(sett_noNeed) == 0 and nb_set < 4:
             nb_set += 1
             sett_noNeed, settl = self.settl_wal_serum()
