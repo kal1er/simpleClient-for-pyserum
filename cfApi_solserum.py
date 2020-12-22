@@ -23,7 +23,10 @@ class SolSerumClient:
         base_url = 'https://api.mainnet-beta.solana.com/'
         self._cc = conn(base_url)
         self._market = Market.load(conn(base_url), PublicKey(market_address))
-        self._payer = Account(base58.b58decode(secret_b58)[:32])
+        if secret_b58 == None:
+            self._payer = Account()
+        else:
+            self._payer = Account(base58.b58decode(secret_b58)[:32])
         self._owner_wallet = owner_wallet
         self._token_mint_wallet_bas = token_mint_wallet_bas
         self._token_mint_wallet_quo = token_mint_wallet_quo
